@@ -45,5 +45,9 @@ gradlePlugin {
             id = "com.dothebestmayb.convention.cmp.application"
             implementationClass = "CmpApplicationConventionPlugin"
         }
+        register("kmpLibrary") {
+            id = "com.dothebestmayb.convention.kmp.library"
+            implementationClass = "KmpLibraryConventionPlugin"
+        }
     }
 }
