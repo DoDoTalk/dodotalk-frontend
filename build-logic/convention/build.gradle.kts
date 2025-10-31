@@ -41,5 +41,9 @@ gradlePlugin {
             id = "com.dothebestmayb.convention.android.application.compose"
             implementationClass = "AndroidApplicationComposeConventionPlugin"
         }
+        register("cmpComposeApplication") {
+            id = "com.dothebestmayb.convention.cmp.application"
+            implementationClass = "CmpApplicationConventionPlugin"
+        }
     }
 }
