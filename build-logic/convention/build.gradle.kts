@@ -12,6 +12,8 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.jetbrains.compose.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
+    compileOnly(libs.androidx.room.gradle.plugin)
     implementation(libs.buildkonfig.gradlePlugin)
     implementation(libs.buildkonfig.compiler)
 }
@@ -63,6 +65,10 @@ gradlePlugin {
         register("buildKonfig") {
             id = "com.dothebestmayb.convention.buildkonfig"
             implementationClass = "BuildKonfigConventionPlugin"
+        }
+        register("room") {
+            id = "com.dothebestmayb.convention.room"
+            implementationClass = "RoomConventionPlugin"
         }
     }
 }
