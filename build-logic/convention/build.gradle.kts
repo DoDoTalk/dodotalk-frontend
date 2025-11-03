@@ -12,6 +12,8 @@ dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.jetbrains.compose.gradlePlugin)
+    implementation(libs.buildkonfig.gradlePlugin)
+    implementation(libs.buildkonfig.compiler)
 }
 
 java {
@@ -57,6 +59,10 @@ gradlePlugin {
         register("cmpFeature") {
             id = "com.dothebestmayb.convention.cmp.feature"
             implementationClass = "CmpFeatureConventionPlugin"
+        }
+        register("buildKonfig") {
+            id = "com.dothebestmayb.convention.buildkonfig"
+            implementationClass = "BuildKonfigConventionPlugin"
         }
     }
 }
