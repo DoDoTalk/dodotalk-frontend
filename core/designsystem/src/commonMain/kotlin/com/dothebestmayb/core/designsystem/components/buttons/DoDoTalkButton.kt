@@ -1,4 +1,4 @@
-package com.dothebestmayb.core.designsystem.components.button
+package com.dothebestmayb.core.designsystem.components.buttons
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
