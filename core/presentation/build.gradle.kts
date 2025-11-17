@@ -17,7 +17,7 @@ kotlin {
 
                 implementation(libs.material3.adaptive)
 
-                implementation(compose.components.resources)
+                implementation(libs.jetbrains.compose.components.resources)
             }
         }
 

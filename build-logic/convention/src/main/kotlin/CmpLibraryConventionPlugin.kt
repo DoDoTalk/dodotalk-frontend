@@ -1,10 +1,8 @@
-import com.dothebestmayb.dodotalk.convention.compose
 import com.dothebestmayb.dodotalk.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.invoke
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class CmpLibraryConventionPlugin : Plugin<Project> {
@@ -21,22 +19,12 @@ class CmpLibraryConventionPlugin : Plugin<Project> {
                 sourceSets {
                     commonMain {
                         dependencies {
-                            implementation(compose.ui)
-                            implementation(compose.foundation)
-                            implementation(compose.material3)
-                            implementation(
-                                libs.findLibrary("jetbrains-compose-material-icons-core").get()
-                            )
+                            implementation(libs.findLibrary("jetbrains-compose-ui").get())
+                            implementation(libs.findLibrary("jetbrains-compose-foundation").get())
+                            implementation(libs.findLibrary("jetbrains-compose-material3").get())
+                            implementation(libs.findLibrary("jetbrains-compose-material-icons-core").get())
+                            implementation(libs.findLibrary("jetbrains-compose-ui-tooling-preview").get())
                         }
-                    }
-                }
-
-                @OptIn(ExperimentalKotlinGradlePluginApi::class)
-                sourceSets.invokeWhenCreated("androidDebug") {
-                    dependencies {
-                        implementation(
-                            libs.findLibrary("androidx-compose-ui-tooling").get()
-                        )
                     }
                 }
             }
