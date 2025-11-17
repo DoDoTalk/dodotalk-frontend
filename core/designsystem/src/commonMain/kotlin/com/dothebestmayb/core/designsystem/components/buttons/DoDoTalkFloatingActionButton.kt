@@ -1,0 +1,44 @@
+package com.dothebestmayb.core.designsystem.components.buttons
+
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
+
+@Composable
+fun DoDoTalkFloatingActionButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    FloatingActionButton(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(size = 8.dp),
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+        content = content
+    )
+}
+
+@Preview
+@Composable
+private fun DoDoTalkFloatingActionButtonPreview() {
+    DoDoTalkTheme {
+        DoDoTalkFloatingActionButton(
+            onClick = {},
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = null,
+            )
+        }
+    }
+}
