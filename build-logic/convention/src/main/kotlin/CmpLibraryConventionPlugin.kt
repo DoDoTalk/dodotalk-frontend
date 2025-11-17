@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.invoke
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 class CmpLibraryConventionPlugin : Plugin<Project> {
@@ -27,6 +28,15 @@ class CmpLibraryConventionPlugin : Plugin<Project> {
                                 libs.findLibrary("jetbrains-compose-material-icons-core").get()
                             )
                         }
+                    }
+                }
+
+                @OptIn(ExperimentalKotlinGradlePluginApi::class)
+                sourceSets.invokeWhenCreated("androidDebug") {
+                    dependencies {
+                        implementation(
+                            libs.findLibrary("androidx-compose-ui-tooling").get()
+                        )
                     }
                 }
             }
