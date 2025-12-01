@@ -8,15 +8,21 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,9 +44,9 @@ import com.dothebestmayb.core.presentation.util.currentDeviceConfiguration
 fun DoDoTalkAdaptiveFormLayout(
     headerText: String,
     logo: @Composable () -> Unit,
-    formContent: @Composable ColumnScope.() -> Unit,
     modifier: Modifier = Modifier,
     errorText: String? = null,
+    formContent: @Composable ColumnScope.() -> Unit,
 ) {
     val configuration = currentDeviceConfiguration()
     val headerColor = if (configuration == DeviceConfiguration.MOBILE_LANDSCAPE) {
@@ -78,11 +84,13 @@ fun DoDoTalkAdaptiveFormLayout(
                 modifier = modifier
                     .fillMaxSize()
                     .consumeWindowInsets(WindowInsets.displayCutout)
+                    // 내비게이션 바가 제스처 대신 버튼으로 되어 있는 경우 겹치지 않도록 padding 추가
+                    .padding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal).asPaddingValues())
             ) {
                 Column(
                     modifier = Modifier
                         .weight(1f),
-                    verticalArrangement = Arrangement.spacedBy(24.dp)
+                    verticalArrangement = Arrangement.spacedBy(24.dp),
                 ) {
                     Spacer(modifier = Modifier.height(16.dp))
                     logo()
@@ -90,13 +98,17 @@ fun DoDoTalkAdaptiveFormLayout(
                         headerText = headerText,
                         headerColor = headerColor,
                         errorText = errorText,
+                        headerTextAlignment = TextAlign.Start,
                     )
                 }
                 DoDoTalkSurface(
                     modifier = Modifier
                         .weight(1f)
                 ) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     formContent()
+                    // gesture navigation과 content가 겹치지 않도록 하단에 공간 추가
+                    Spacer(modifier = Modifier.windowInsetsBottomHeight(WindowInsets.navigationBars))
                 }
             }
         }
@@ -119,8 +131,8 @@ fun DoDoTalkAdaptiveFormLayout(
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(32.dp))
                         .background(MaterialTheme.colorScheme.surface)
-                        .padding(horizontal = 24.dp, vertical = 32.dp),
-                    verticalArrangement = Arrangement.spacedBy(24.dp),
+                        .padding(horizontal = 24.dp, vertical = 32.dp)
+                        .verticalScroll(rememberScrollState()),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     AuthHeaderSection(
@@ -138,14 +150,15 @@ fun DoDoTalkAdaptiveFormLayout(
 @Composable
 private fun ColumnScope.AuthHeaderSection(
     headerText: String,
-    errorText: String? = null,
     headerColor: Color,
+    errorText: String? = null,
+    headerTextAlignment: TextAlign = TextAlign.Center
 ) {
     Text(
         text = headerText,
         style = MaterialTheme.typography.titleLarge,
         color = headerColor,
-        textAlign = TextAlign.Center,
+        textAlign = headerTextAlignment,
         modifier = Modifier.fillMaxWidth()
     )
     AnimatedVisibility(
@@ -158,7 +171,7 @@ private fun ColumnScope.AuthHeaderSection(
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier
                     .fillMaxWidth(),
-                textAlign = TextAlign.Center,
+                textAlign = headerTextAlignment,
             )
         }
     }

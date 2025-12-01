@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<resources>
+    <string name="welcome_to_dodotalk">Welcome to DoDoTalk!</string>
+    <string name="username">닉네임</string>
+    <string name="email">이메일</string>
+    <string name="password">비밀번호</string>
+    <string name="register">회원가입</string>
+    <string name="username_placeholder">DoDoTalk</string>
+    <string name="email_placeholder">hello@dodotalk.com</string>
+    <string name="login">로그인</string>
+    <string name="username_hint">3~20자로 입력해 주세요.</string>
+    <string name="password_hint">9자 이상, 최소 1개의 숫자와 1개의 대문자를 포함하세요</string>
+    <string name="error_account_exists">입력한 이메일 또는 닉네임으로 된 계정이 이미 존재합니다</string>
+</resources>
