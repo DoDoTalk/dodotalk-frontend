@@ -8,7 +8,10 @@
     <string name="username_placeholder">DoDoTalk</string>
     <string name="email_placeholder">hello@dodotalk.com</string>
     <string name="login">로그인</string>
-    <string name="username_hint">3~20자로 입력해 주세요.</string>
-    <string name="password_hint">9자 이상, 최소 1개의 숫자와 1개의 대문자를 포함하세요</string>
+    <string name="username_hint">3~20자로 입력해 주세요</string>
+    <string name="password_hint">9~20자, 최소 1개의 숫자와 1개의 대문자를 포함하세요</string>
     <string name="error_account_exists">입력한 이메일 또는 닉네임으로 된 계정이 이미 존재합니다</string>
+    <string name="error_invalid_password">비밀번호는 9자 이상이고, 최소 1개의 숫자와 1개의 대문자를 포함해야 합니다</string>
+    <string name="error_invalid_email">유효하지 않은 이메일 포맷입니다</string>
+    <string name="error_invalid_username">닉네임은 3 ~ 20자 길이여야 합니다</string>
 </resources>
