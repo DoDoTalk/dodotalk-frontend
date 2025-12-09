@@ -50,7 +50,7 @@ fun DoDoTalkSimpleSuccessLayout(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = description,
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.extended.textSecondary,
                 textAlign = TextAlign.Center
             )
