@@ -33,10 +33,11 @@ import dodotalk.feature.auth.presentation.generated.resources.username_hint
 import dodotalk.feature.auth.presentation.generated.resources.username_placeholder
 import dodotalk.feature.auth.presentation.generated.resources.welcome_to_dodotalk
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun RegisterRoot(
-    viewModel: RegisterViewModel = viewModel(),
+    viewModel: RegisterViewModel = koinViewModel(),
     onRegisterSuccess: (String) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
