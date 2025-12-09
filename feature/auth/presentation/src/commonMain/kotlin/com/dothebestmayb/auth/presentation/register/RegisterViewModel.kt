@@ -3,20 +3,34 @@ package com.dothebestmayb.auth.presentation.register
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dothebestmayb.auth.domain.EmailValidator
+import com.dothebestmayb.core.domain.auth.AuthService
+import com.dothebestmayb.core.domain.util.DataError
+import com.dothebestmayb.core.domain.util.onFailure
+import com.dothebestmayb.core.domain.util.onSuccess
 import com.dothebestmayb.core.domain.validation.PasswordValidator
 import com.dothebestmayb.core.domain.validation.UsernameValidator
 import com.dothebestmayb.core.presentation.util.UitText
+import com.dothebestmayb.core.presentation.util.toUiText
 import dodotalk.feature.auth.presentation.generated.resources.Res
+import dodotalk.feature.auth.presentation.generated.resources.error_account_exists
 import dodotalk.feature.auth.presentation.generated.resources.error_invalid_email
 import dodotalk.feature.auth.presentation.generated.resources.error_invalid_password
 import dodotalk.feature.auth.presentation.generated.resources.error_invalid_username
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(
+    private val authService: AuthService,
+) : ViewModel() {
+
+    private val eventChannel = Channel<RegisterEvent>()
+    val events = eventChannel.receiveAsFlow()
 
     private var hasLoadedInitialData = false
 
@@ -36,7 +50,59 @@ class RegisterViewModel : ViewModel() {
 
     fun onAction(action: RegisterAction) {
         when (action) {
+            RegisterAction.OnRegisterClick -> register()
+            RegisterAction.OnTogglePasswordVisibilityClick -> {
+                _state.update {
+                    it.copy(
+                        isPasswordVisible = !it.isPasswordVisible
+                    )
+                }
+            }
             else -> Unit
+        }
+    }
+
+    private fun register() {
+        if (!validateFormInputs()) {
+            return
+        }
+
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    isRegistering = true
+                )
+            }
+
+            val email = state.value.emailTextState.text.toString()
+            val username = state.value.usernameTextState.text.toString()
+            val password = state.value.passwordTextState.text.toString()
+
+            authService
+                .register(
+                    email = email,
+                    username = username,
+                    password = password
+                )
+                .onSuccess {
+                    _state.update {
+                        it.copy(
+                            isRegistering = false
+                        )
+                    }
+                }
+                .onFailure { error ->
+                    val registrationError = when (error) {
+                        DataError.Remote.CONFLICT -> UitText.Resource(Res.string.error_account_exists)
+                        else -> error.toUiText()
+                    }
+                    _state.update {
+                        it.copy(
+                            isRegistering = false,
+                            registrationError = registrationError
+                        )
+                    }
+                }
         }
     }
 

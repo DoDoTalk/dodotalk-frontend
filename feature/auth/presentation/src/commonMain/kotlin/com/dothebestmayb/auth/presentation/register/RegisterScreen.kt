@@ -20,6 +20,7 @@ import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSnackbarSca
 import com.dothebestmayb.core.designsystem.components.textfields.DoDoTalkPasswordTextField
 import com.dothebestmayb.core.designsystem.components.textfields.DoDoTalkTextField
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
+import com.dothebestmayb.core.presentation.util.ObserveAsEvents
 import dodotalk.feature.auth.presentation.generated.resources.Res
 import dodotalk.feature.auth.presentation.generated.resources.email
 import dodotalk.feature.auth.presentation.generated.resources.email_placeholder
@@ -35,12 +36,21 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun RegisterRoot(
-    viewModel: RegisterViewModel = viewModel()
+    viewModel: RegisterViewModel = viewModel(),
+    onRegisterSuccess: (String) -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val snackbarHostState = remember {
         SnackbarHostState()
+    }
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is RegisterEvent.Success -> {
+                onRegisterSuccess(event.email)
+            }
+        }
     }
 
     RegisterScreen(

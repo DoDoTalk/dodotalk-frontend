@@ -9,6 +9,8 @@ import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 @Preview
 fun App() {
     DoDoTalkTheme {
-        RegisterRoot()
+        RegisterRoot(
+            onRegisterSuccess = {},
+        )
     }
 }
