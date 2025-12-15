@@ -17,7 +17,7 @@ import dodotalk.core.presentation.generated.resources.error_too_many_requests
 import dodotalk.core.presentation.generated.resources.error_unauthorized
 import dodotalk.core.presentation.generated.resources.error_unknown
 
-fun DataError.toUiText(): UitText {
+fun DataError.toUiText(): UiText {
     val resource = when (this) {
         DataError.Local.DISK_FULL -> Res.string.error_disk_full
         DataError.Local.NOT_FOUND -> Res.string.error_not_found
@@ -36,5 +36,5 @@ fun DataError.toUiText(): UitText {
         DataError.Remote.SERIALIZATION -> Res.string.error_serialization
         DataError.Remote.UNKNOWN -> Res.string.error_unknown
     }
-    return UitText.Resource(resource)
+    return UiText.Resource(resource)
 }

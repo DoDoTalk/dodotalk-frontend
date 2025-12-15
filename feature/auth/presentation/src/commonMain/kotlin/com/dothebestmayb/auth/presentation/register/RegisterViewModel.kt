@@ -10,7 +10,7 @@ import com.dothebestmayb.core.domain.util.onFailure
 import com.dothebestmayb.core.domain.util.onSuccess
 import com.dothebestmayb.core.domain.validation.PasswordValidator
 import com.dothebestmayb.core.domain.validation.UsernameValidator
-import com.dothebestmayb.core.presentation.util.UitText
+import com.dothebestmayb.core.presentation.util.UiText
 import com.dothebestmayb.core.presentation.util.toUiText
 import dodotalk.feature.auth.presentation.generated.resources.Res
 import dodotalk.feature.auth.presentation.generated.resources.error_account_exists
@@ -135,7 +135,7 @@ class RegisterViewModel(
                 }
                 .onFailure { error ->
                     val registrationError = when (error) {
-                        DataError.Remote.CONFLICT -> UitText.Resource(Res.string.error_account_exists)
+                        DataError.Remote.CONFLICT -> UiText.Resource(Res.string.error_account_exists)
                         else -> error.toUiText()
                     }
                     _state.update {
@@ -172,13 +172,13 @@ class RegisterViewModel(
         val isUsernameValid = UsernameValidator.validate(username)
 
         val emailError = if (!isEmailValid) {
-            UitText.Resource(Res.string.error_invalid_email)
+            UiText.Resource(Res.string.error_invalid_email)
         } else null
         val usernameError = if (!isUsernameValid) {
-            UitText.Resource(Res.string.error_invalid_username)
+            UiText.Resource(Res.string.error_invalid_username)
         } else null
         val passwordError = if (!passwordValidationState.isValidPassword) {
-            UitText.Resource(Res.string.error_invalid_password)
+            UiText.Resource(Res.string.error_invalid_password)
         } else null
 
         _state.update {
