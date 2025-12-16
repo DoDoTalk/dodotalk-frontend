@@ -12,7 +12,7 @@ import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkSuccessIcon
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButtonStyle
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkAdaptiveResultLayout
-import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSimpleSuccessLayout
+import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSimpleResultLayout
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSnackbarScaffold
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.presentation.util.ObserveAsEvents
@@ -62,7 +62,7 @@ fun RegisterSuccessScreen(
         snackbarHostState = snackbarHostState
     ) {
         DoDoTalkAdaptiveResultLayout {
-            DoDoTalkSimpleSuccessLayout(
+            DoDoTalkSimpleResultLayout(
                 title = stringResource(Res.string.account_successfully_created),
                 description = stringResource(
                     Res.string.verification_email_send_to_x,

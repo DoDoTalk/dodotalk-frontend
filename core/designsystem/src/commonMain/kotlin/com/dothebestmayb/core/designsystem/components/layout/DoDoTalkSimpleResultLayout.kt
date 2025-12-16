@@ -1,6 +1,7 @@
 package com.dothebestmayb.core.designsystem.components.layout
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,10 +22,10 @@ import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.designsystem.theme.extended
 
 @Composable
-fun DoDoTalkSimpleSuccessLayout(
+fun DoDoTalkSimpleResultLayout(
     title: String,
     description: String,
-    icon: @Composable () -> Unit,
+    icon: @Composable ColumnScope.() -> Unit,
     primaryButton: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     secondaryButton: @Composable (() -> Unit)? = null,
@@ -84,9 +85,9 @@ fun DoDoTalkSimpleSuccessLayout(
     showBackground = true,
 )
 @Composable
-private fun DoDoTalkSimpleSuccessLayoutPreview() {
+private fun DoDoTalkSimpleResultLayoutPreview() {
     DoDoTalkTheme {
-        DoDoTalkSimpleSuccessLayout(
+        DoDoTalkSimpleResultLayout(
             title = "Hello world!",
             description = "Test description",
             icon = {
@@ -115,9 +116,9 @@ private fun DoDoTalkSimpleSuccessLayoutPreview() {
 
 @Preview()
 @Composable
-private fun DoDoTalkSimpleSuccessLayoutDarkPreview() {
+private fun DoDoTalkSimpleResultLayoutDarkPreview() {
     DoDoTalkTheme(darkTheme = true) {
-        DoDoTalkSimpleSuccessLayout(
+        DoDoTalkSimpleResultLayout(
             title = "Hello world!",
             description = "Test description",
             icon = {
