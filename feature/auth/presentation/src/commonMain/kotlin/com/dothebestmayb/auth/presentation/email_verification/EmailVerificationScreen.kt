@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkFailureIcon
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkSuccessIcon
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
@@ -36,10 +35,11 @@ import dodotalk.feature.auth.presentation.generated.resources.email_verified_suc
 import dodotalk.feature.auth.presentation.generated.resources.login
 import dodotalk.feature.auth.presentation.generated.resources.verifying_account
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EmailVerificationRoot(
-    viewModel: EmailVerificationViewModel = viewModel()
+    viewModel: EmailVerificationViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
