@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.dothebestmayb.auth.presentation.email_verification.EmailVerificationRoot
+import com.dothebestmayb.auth.presentation.login.LoginRoot
 import com.dothebestmayb.auth.presentation.register.RegisterRoot
 import com.dothebestmayb.auth.presentation.register_success.RegisterSuccessRoot
 
@@ -14,12 +15,37 @@ fun NavGraphBuilder.authGraph(
     onLoginSuccess: () -> Unit,
 ) {
     navigation<AuthGraphRoutes.Graph>(
-        startDestination = AuthGraphRoutes.Register,
+        startDestination = AuthGraphRoutes.Login,
     ) {
+        composable<AuthGraphRoutes.Login> {
+            LoginRoot(
+                onLoginSuccess = onLoginSuccess,
+                onForgotPasswordClick = {
+                    navController.navigate(AuthGraphRoutes.ForgotPassword)
+                },
+                onCreateAccountClick = {
+                    navController.navigate(AuthGraphRoutes.Register) {
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                }
+            )
+        }
+
         composable<AuthGraphRoutes.Register> {
             RegisterRoot(
                 onRegisterSuccess = {
                     navController.navigate(AuthGraphRoutes.RegisterSuccess(it))
+                },
+                onLoginClick = {
+                    navController.navigate(AuthGraphRoutes.Login) {
+                        popUpTo(AuthGraphRoutes.Register) {
+                            inclusive = true // Register도 pop
+                            saveState = true // Register에 있는 정보를 저장한다.
+                        }
+                        launchSingleTop = true
+                        restoreState = true // Login에 저장되어 있던 정보 복원
+                    }
                 }
             )
         }
