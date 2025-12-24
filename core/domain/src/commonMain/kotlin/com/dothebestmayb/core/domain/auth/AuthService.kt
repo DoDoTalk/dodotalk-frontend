@@ -2,8 +2,14 @@ package com.dothebestmayb.core.domain.auth
 
 import com.dothebestmayb.core.domain.util.DataError
 import com.dothebestmayb.core.domain.util.EmptyResult
+import com.dothebestmayb.core.domain.util.Result
 
 interface AuthService {
+
+    suspend fun login(
+        email: String,
+        password: String,
+    ): Result<AuthInfo, DataError.Remote>
 
     suspend fun register(
         email: String,

@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkFailureIcon
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkSuccessIcon
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
@@ -39,13 +40,21 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EmailVerificationRoot(
-    viewModel: EmailVerificationViewModel = koinViewModel()
+    viewModel: EmailVerificationViewModel = koinViewModel(),
+    onLoginClick: () -> Unit,
+    onCloseClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     EmailVerificationScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                EmailVerificationAction.OnCloseClick -> onCloseClick()
+                EmailVerificationAction.OnLoginClick -> onLoginClick()
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 

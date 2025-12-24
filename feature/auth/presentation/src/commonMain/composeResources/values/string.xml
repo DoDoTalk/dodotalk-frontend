@@ -31,5 +31,6 @@
     <string name="error_invalid_password">비밀번호는 9자 이상이고, 최소 1개의 숫자와 1개의 대문자를 포함해야 합니다</string>
     <string name="error_invalid_email">유효하지 않은 이메일 포맷입니다</string>
     <string name="error_invalid_username">닉네임은 3 ~ 20자 길이여야 합니다</string>
-    <string name="error_invalid_credentials">이메일 또는 비밀번호가 일치하지 않습니다.</string>
+    <string name="error_invalid_credentials">이메일 또는 비밀번호가 일치하지 않습니다</string>
+    <string name="error_email_not_verified">이메일이 인증되지 않아 로그인할 수 없습니다</string>
 </resources>

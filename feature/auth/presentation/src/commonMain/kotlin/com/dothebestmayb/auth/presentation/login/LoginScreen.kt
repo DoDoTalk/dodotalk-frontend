@@ -23,6 +23,7 @@ import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkAdaptiveFor
 import com.dothebestmayb.core.designsystem.components.textfields.DoDoTalkPasswordTextField
 import com.dothebestmayb.core.designsystem.components.textfields.DoDoTalkTextField
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
+import com.dothebestmayb.core.presentation.util.ObserveAsEvents
 import dodotalk.feature.auth.presentation.generated.resources.Res
 import dodotalk.feature.auth.presentation.generated.resources.create_account
 import dodotalk.feature.auth.presentation.generated.resources.email
@@ -42,6 +43,12 @@ fun LoginRoot(
     onCreateAccountClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            LoginEvent.Success -> onLoginSuccess()
+        }
+    }
 
     LoginScreen(
         state = state,
