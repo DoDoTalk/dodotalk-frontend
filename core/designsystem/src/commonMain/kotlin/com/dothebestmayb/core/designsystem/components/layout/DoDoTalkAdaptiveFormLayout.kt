@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -83,10 +84,10 @@ fun DoDoTalkAdaptiveFormLayout(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = modifier
                     .fillMaxSize()
-                    .consumeWindowInsets(WindowInsets.displayCutout)
+                    .background(MaterialTheme.colorScheme.background)
+                    .windowInsetsPadding(WindowInsets.displayCutout)
                     // 내비게이션 바가 제스처 대신 버튼으로 되어 있는 경우 겹치지 않도록 padding 추가
                     .padding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal).asPaddingValues())
-                    .background(MaterialTheme.colorScheme.background)
             ) {
                 Column(
                     modifier = Modifier
