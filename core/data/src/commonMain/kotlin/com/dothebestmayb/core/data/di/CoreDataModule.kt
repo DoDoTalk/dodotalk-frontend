@@ -20,7 +20,7 @@ val coreDataModule = module {
     single<DoDoTalkLogger> { KermitLogger }
 
     single {
-        HttpClientFactory(get()).create(get())
+        HttpClientFactory(get(), get()).create(get())
     }
 
     // 아래 single block을 다르게 표현한 코드
