@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dothebestmayb.auth.domain.EmailValidator
 import com.dothebestmayb.core.domain.auth.AuthService
+import com.dothebestmayb.core.domain.auth.SessionStorage
 import com.dothebestmayb.core.domain.util.DataError
 import com.dothebestmayb.core.domain.util.onFailure
 import com.dothebestmayb.core.domain.util.onSuccess
@@ -28,6 +29,7 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val authService: AuthService,
+    private val sessionStorage: SessionStorage,
 ) : ViewModel() {
 
     private var hasLoadedInitialData = false
@@ -111,7 +113,8 @@ class LoginViewModel(
                     password = password,
                 )
                 .onSuccess { authInfo ->
-                    // TODO : token, 유저정보 저장하기
+                    sessionStorage.set(authInfo)
+
                     _state.update {
                         it.copy(
                             isLoggingIn = false,
