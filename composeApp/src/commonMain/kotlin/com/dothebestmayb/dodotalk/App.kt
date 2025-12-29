@@ -9,6 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.dothebestmayb.auth.presentation.navigation.AuthGraphRoutes
 import com.dothebestmayb.chat.presentation.chat_list.ChatListRoute
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
+import com.dothebestmayb.core.presentation.util.ObserveAsEvents
 import com.dothebestmayb.dodotalk.navigation.DeepLinkListener
 import com.dothebestmayb.dodotalk.navigation.NavigationRoot
 import org.koin.compose.viewmodel.koinViewModel
@@ -32,6 +33,19 @@ fun App(
             onAuthenticationChecked()
         }
     }
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is MainEvent.OnSessionExpired -> {
+                navController.navigate(AuthGraphRoutes.Graph) {
+                    popUpTo(AuthGraphRoutes.Graph) {
+                        inclusive = false
+                    }
+                }
+            }
+        }
+    }
+
     DoDoTalkTheme {
         if (!state.isCheckingAuth) {
             NavigationRoot(
