@@ -20,11 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- autoVerify : 서버에 있는 assetlinks.json을 이용해 scheme과 host domain 소유 여부를 시스템이 검증하도록 설정하는 변수 -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+                <!-- https를 사용하는 경우 해당 도메인의 소유자임을 증명하기 위해 서버에 인증 파일을 업로드 하는 등의 작업이 필요하다. -->
                 <data android:scheme="https"
                     android:host="dodotalk.shop"
                     android:pathPrefix="/api/auth/verify" />
