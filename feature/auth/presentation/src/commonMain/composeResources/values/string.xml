@@ -2,6 +2,8 @@
 <resources>
     <string name="welcome_to_dodotalk">Welcome to DoDoTalk!</string>
     <string name="welcome_back">Welcome back!</string>
+    <string name="set_new_password">비밀번호 변경하기</string>
+    <string name="new_password">새로운 비밀번호</string>
     <string name="account_successfully_created">DoDoTalk 계정이 성공적으로 생성됐습니다!</string>
     <string name="verification_email_send_to_x">인증 메일이 %1$s로 발송됐습니다</string>
     <string name="resend_verification_email">인증 메일 재전송</string>
@@ -16,6 +18,7 @@
         이메일을 인증할 수 없습니다. 링크가 잘못되었거나 만료되었을 수 있습니다.
     </string>
     <string name="close">닫기</string>
+    <string name="change">변경하기</string>
     <string name="username">닉네임</string>
     <string name="forgot_password">비밀번호 찾기</string>
     <string name="forgot_password_send_email">재설정 링크 보내기</string>
@@ -36,5 +39,11 @@
     <string name="error_email_not_verified">이메일이 인증되지 않아 로그인할 수 없습니다</string>
     <string name="forgot_password_email_sent_successfully">
         비밀번호를 재설정할 수 있는 링크가 이메일로 발송됐습니다
+    </string>
+    <string name="reset_password_successfully">
+        비밀번호가 성공적으로 변경됐습니다.
+    </string>
+    <string name="error_reset_password_token_invalid">
+        비밀번호 재설정 링크가 유효하지 않거나 만료됐습니다. 변경 링크를 다시 요청해주세요.
     </string>
 </resources>
