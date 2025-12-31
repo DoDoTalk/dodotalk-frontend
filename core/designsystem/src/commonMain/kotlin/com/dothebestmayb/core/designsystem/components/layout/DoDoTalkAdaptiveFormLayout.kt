@@ -39,6 +39,7 @@ import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkBrandLogo
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.designsystem.theme.extended
 import com.dothebestmayb.core.presentation.util.DeviceConfiguration
+import com.dothebestmayb.core.presentation.util.clearFocusOnTap
 import com.dothebestmayb.core.presentation.util.currentDeviceConfiguration
 
 @Composable
@@ -60,6 +61,7 @@ fun DoDoTalkAdaptiveFormLayout(
         DeviceConfiguration.MOBILE_PORTRAIT -> {
             DoDoTalkSurface(
                 modifier = modifier
+                    .clearFocusOnTap()
                     .consumeWindowInsets(WindowInsets.navigationBars)
                     .consumeWindowInsets(WindowInsets.displayCutout), // cutout: 펀치홀 같은 거
                 header = {
@@ -84,6 +86,7 @@ fun DoDoTalkAdaptiveFormLayout(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = modifier
                     .fillMaxSize()
+                    .clearFocusOnTap()
                     .background(MaterialTheme.colorScheme.background)
                     .windowInsetsPadding(WindowInsets.displayCutout)
                     // 내비게이션 바가 제스처 대신 버튼으로 되어 있는 경우 겹치지 않도록 padding 추가
@@ -121,6 +124,7 @@ fun DoDoTalkAdaptiveFormLayout(
             Column(
                 modifier = modifier
                     .fillMaxSize()
+                    .clearFocusOnTap()
                     .background(MaterialTheme.colorScheme.background)
                     .padding(top = 32.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
