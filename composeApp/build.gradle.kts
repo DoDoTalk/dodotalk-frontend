@@ -1,97 +1,40 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.convention.cmp.application)
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
-    
-    listOf(
-        iosArm64(),
-        iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
-        }
-    }
-    
-    jvm()
-    
     sourceSets {
         androidMain.dependencies {
-            implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+
+            implementation(libs.core.splashscreen)
+            implementation(libs.koin.android)
         }
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
-        }
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
-        }
-        jvmMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.kotlinx.coroutinesSwing)
-        }
-    }
-}
+            implementation(projects.core.data)
+            implementation(projects.core.domain)
+            implementation(projects.core.designsystem)
+            implementation(projects.core.presentation)
 
-android {
-    namespace = "com.dothebestmayb.dodotalk"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
+            implementation(projects.feature.auth.domain)
+            implementation(projects.feature.auth.presentation)
 
-    defaultConfig {
-        applicationId = "com.dothebestmayb.dodotalk"
-        minSdk = libs.versions.android.minSdk.get().toInt()
-        targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
+            implementation(projects.feature.chat.data)
+            implementation(projects.feature.chat.database)
+            implementation(projects.feature.chat.domain)
+            implementation(projects.feature.chat.presentation)
 
-dependencies {
-    debugImplementation(compose.uiTooling)
-}
+            implementation(libs.jetbrains.compose.navigation)
+            implementation(libs.bundles.koin.common)
 
-compose.desktop {
-    application {
-        mainClass = "com.dothebestmayb.dodotalk.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.dothebestmayb.dodotalk"
-            packageVersion = "1.0.0"
+            implementation(libs.jetbrains.compose.ui.tooling.preview)
+            implementation(libs.jetbrains.compose.runtime)
+            implementation(libs.jetbrains.compose.foundation)
+            implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.ui)
+            implementation(libs.jetbrains.compose.components.resources)
+            implementation(libs.jetbrains.compose.viewmodel)
+            implementation(libs.jetbrains.lifecycle.compose)
         }
     }
 }
