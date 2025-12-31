@@ -42,8 +42,8 @@ class LoginViewModel(
         .distinctUntilChanged()
 
     private val isPasswordNotBlankFlow =
-        snapshotFlow { state.value.passwordTextFieldState }
-            .map { it.text.toString().isNotBlank() }
+        snapshotFlow { state.value.passwordTextFieldState.text.toString() }
+            .map { it.isNotBlank() }
             .distinctUntilChanged()
 
     private val _state = MutableStateFlow(LoginState())
@@ -104,8 +104,8 @@ class LoginViewModel(
                 )
             }
 
-            val email = state.value.emailTextFieldState.toString()
-            val password = state.value.passwordTextFieldState.toString()
+            val email = state.value.emailTextFieldState.text.toString()
+            val password = state.value.passwordTextFieldState.text.toString()
 
             authService
                 .login(
