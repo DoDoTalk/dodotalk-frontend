@@ -88,7 +88,7 @@ fun DoDoTalkAdaptiveFormLayout(
                     .fillMaxSize()
                     .clearFocusOnTap()
                     .background(MaterialTheme.colorScheme.background)
-                    .windowInsetsPadding(WindowInsets.displayCutout)
+                    .consumeWindowInsets(WindowInsets.displayCutout)
                     // 내비게이션 바가 제스처 대신 버튼으로 되어 있는 경우 겹치지 않도록 padding 추가
                     .padding(WindowInsets.navigationBars.only(WindowInsetsSides.Horizontal).asPaddingValues())
             ) {

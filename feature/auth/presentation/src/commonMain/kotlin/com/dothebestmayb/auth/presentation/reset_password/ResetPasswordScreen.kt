@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkBrandLogo
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkAdaptiveFormLayout
+import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSnackbarScaffold
 import com.dothebestmayb.core.designsystem.components.textfields.DoDoTalkPasswordTextField
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.designsystem.theme.extended
@@ -45,46 +46,48 @@ fun ResetPasswordScreen(
     state: ResetPasswordState,
     onAction: (ResetPasswordAction) -> Unit,
 ) {
-    DoDoTalkAdaptiveFormLayout(
-        headerText = stringResource(Res.string.set_new_password),
-        errorText = state.errorText?.asString(),
-        logo = {
-            DoDoTalkBrandLogo()
-        }
-    ) {
-        DoDoTalkPasswordTextField(
-            state = state.passwordTextState,
-            modifier = Modifier
-                .fillMaxWidth(),
-            placeholder = stringResource(Res.string.password),
-            title = stringResource(Res.string.password),
-            supportingText = stringResource(Res.string.password_hint),
-            isPasswordVisible = state.isPasswordVisible,
-            onToggleVisibilityClick = {
-                onAction(ResetPasswordAction.OnTogglePasswordVisibilityClick)
-            },
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        DoDoTalkButton(
-            text = stringResource(Res.string.change),
-            onClick = {
-                onAction(ResetPasswordAction.OnChangeClick)
-            },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = !state.isLoading && state.canSubmit,
-            isLoading = state.isLoading,
-        )
-
-        if (state.isResetSuccessful) {
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(Res.string.reset_password_successfully),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.extended.success,
+    DoDoTalkSnackbarScaffold {
+        DoDoTalkAdaptiveFormLayout(
+            headerText = stringResource(Res.string.set_new_password),
+            errorText = state.errorText?.asString(),
+            logo = {
+                DoDoTalkBrandLogo()
+            }
+        ) {
+            DoDoTalkPasswordTextField(
+                state = state.passwordTextState,
                 modifier = Modifier
                     .fillMaxWidth(),
-                textAlign = TextAlign.Center,
+                placeholder = stringResource(Res.string.password),
+                title = stringResource(Res.string.password),
+                supportingText = stringResource(Res.string.password_hint),
+                isPasswordVisible = state.isPasswordVisible,
+                onToggleVisibilityClick = {
+                    onAction(ResetPasswordAction.OnTogglePasswordVisibilityClick)
+                },
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            DoDoTalkButton(
+                text = stringResource(Res.string.change),
+                onClick = {
+                    onAction(ResetPasswordAction.OnChangeClick)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                enabled = !state.isLoading && state.canSubmit,
+                isLoading = state.isLoading,
+            )
+
+            if (state.isResetSuccessful) {
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = stringResource(Res.string.reset_password_successfully),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.extended.success,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
     }
 }

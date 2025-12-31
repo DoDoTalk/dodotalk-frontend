@@ -16,6 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkBrandLogo
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkAdaptiveFormLayout
+import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSnackbarScaffold
 import com.dothebestmayb.core.designsystem.components.textfields.DoDoTalkTextField
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.designsystem.theme.extended
@@ -45,46 +46,48 @@ fun ForgotPasswordScreen(
     state: ForgotPasswordState,
     onAction: (ForgotPasswordAction) -> Unit,
 ) {
-    DoDoTalkAdaptiveFormLayout(
-        headerText = stringResource(Res.string.forgot_password),
-        errorText = state.errorText?.asString(),
-        logo = {
-            DoDoTalkBrandLogo()
-        }
-    ) {
-        DoDoTalkTextField(
-            state = state.emailTextFiledState,
-            modifier = Modifier
-                .fillMaxWidth(),
-            placeholder = stringResource(Res.string.email_placeholder),
-            title = stringResource(Res.string.email),
-            isError = state.errorText != null,
-            supportingText = state.errorText?.asString(),
-            keyboardType = KeyboardType.Email,
-            singleLine = true,
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        DoDoTalkButton(
-            text = stringResource(Res.string.forgot_password_send_email),
-            onClick = {
-                onAction(ForgotPasswordAction.OnSubmitClick)
-            },
-            modifier = Modifier
-                .fillMaxWidth(),
-            enabled = !state.isLoading && state.canSubmit,
-            isLoading = state.isLoading,
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-
-        if (state.isEmailSentSuccessfully) {
-            Text(
-                text = stringResource(Res.string.forgot_password_email_sent_successfully),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.extended.success,
+    DoDoTalkSnackbarScaffold {
+        DoDoTalkAdaptiveFormLayout(
+            headerText = stringResource(Res.string.forgot_password),
+            errorText = state.errorText?.asString(),
+            logo = {
+                DoDoTalkBrandLogo()
+            }
+        ) {
+            DoDoTalkTextField(
+                state = state.emailTextFiledState,
                 modifier = Modifier
                     .fillMaxWidth(),
-                textAlign = TextAlign.Center,
+                placeholder = stringResource(Res.string.email_placeholder),
+                title = stringResource(Res.string.email),
+                isError = state.errorText != null,
+                supportingText = state.errorText?.asString(),
+                keyboardType = KeyboardType.Email,
+                singleLine = true,
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            DoDoTalkButton(
+                text = stringResource(Res.string.forgot_password_send_email),
+                onClick = {
+                    onAction(ForgotPasswordAction.OnSubmitClick)
+                },
+                modifier = Modifier
+                    .fillMaxWidth(),
+                enabled = !state.isLoading && state.canSubmit,
+                isLoading = state.isLoading,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            if (state.isEmailSentSuccessfully) {
+                Text(
+                    text = stringResource(Res.string.forgot_password_email_sent_successfully),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.extended.success,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
     }
 }

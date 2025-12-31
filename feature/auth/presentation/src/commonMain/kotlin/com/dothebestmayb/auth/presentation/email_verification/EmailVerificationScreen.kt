@@ -25,6 +25,7 @@ import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButtonStyle
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkAdaptiveResultLayout
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSimpleResultLayout
+import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkSnackbarScaffold
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.designsystem.theme.extended
 import dodotalk.feature.auth.presentation.generated.resources.Res
@@ -63,55 +64,57 @@ fun EmailVerificationScreen(
     state: EmailVerificationState,
     onAction: (EmailVerificationAction) -> Unit,
 ) {
-    DoDoTalkAdaptiveResultLayout {
-        when {
-            state.isVerifying -> {
-                VerifyingContent(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-            }
-            state.isVerified -> {
-                DoDoTalkSimpleResultLayout(
-                    title = stringResource(Res.string.email_verified_successfully),
-                    description = stringResource(Res.string.email_verified_successfully_description),
-                    icon = {
-                        DoDoTalkSuccessIcon()
-                    },
-                    primaryButton = {
-                        DoDoTalkButton(
-                            text = stringResource(Res.string.login),
-                            onClick = {
-                                onAction(EmailVerificationAction.OnLoginClick)
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-                )
-            }
-            else -> {
-                DoDoTalkSimpleResultLayout(
-                    title = stringResource(Res.string.email_verified_failed),
-                    description = stringResource(Res.string.email_verified_failed_description),
-                    icon = {
-                        Spacer(modifier = Modifier.height(32.dp))
-                        DoDoTalkFailureIcon(
-                            modifier = Modifier
-                                .size(80.dp)
-                        )
-                        Spacer(modifier = Modifier.height(32.dp))
-                    },
-                    primaryButton = {
-                        DoDoTalkButton(
-                            text = stringResource(Res.string.close),
-                            onClick = {
-                                onAction(EmailVerificationAction.OnCloseClick)
-                            },
-                            modifier = Modifier.fillMaxWidth(),
-                            style = DoDoTalkButtonStyle.SECONDARY
-                        )
-                    }
-                )
+    DoDoTalkSnackbarScaffold {
+        DoDoTalkAdaptiveResultLayout {
+            when {
+                state.isVerifying -> {
+                    VerifyingContent(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    )
+                }
+                state.isVerified -> {
+                    DoDoTalkSimpleResultLayout(
+                        title = stringResource(Res.string.email_verified_successfully),
+                        description = stringResource(Res.string.email_verified_successfully_description),
+                        icon = {
+                            DoDoTalkSuccessIcon()
+                        },
+                        primaryButton = {
+                            DoDoTalkButton(
+                                text = stringResource(Res.string.login),
+                                onClick = {
+                                    onAction(EmailVerificationAction.OnLoginClick)
+                                },
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
+                    )
+                }
+                else -> {
+                    DoDoTalkSimpleResultLayout(
+                        title = stringResource(Res.string.email_verified_failed),
+                        description = stringResource(Res.string.email_verified_failed_description),
+                        icon = {
+                            Spacer(modifier = Modifier.height(32.dp))
+                            DoDoTalkFailureIcon(
+                                modifier = Modifier
+                                    .size(80.dp)
+                            )
+                            Spacer(modifier = Modifier.height(32.dp))
+                        },
+                        primaryButton = {
+                            DoDoTalkButton(
+                                text = stringResource(Res.string.close),
+                                onClick = {
+                                    onAction(EmailVerificationAction.OnCloseClick)
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                style = DoDoTalkButtonStyle.SECONDARY
+                            )
+                        }
+                    )
+                }
             }
         }
     }
