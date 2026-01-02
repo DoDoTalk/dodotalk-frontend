@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -48,6 +49,7 @@ fun DoDoTalkTextField(
     singleLine: Boolean = false,
     enabled: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Text,
+    imeAction: ImeAction = ImeAction.Unspecified,
     onFocusChanged: (Boolean) -> Unit = {},
 ) {
     DoDoTalkTextFieldLayout(
@@ -74,7 +76,8 @@ fun DoDoTalkTextField(
                 }
             ),
             keyboardOptions = KeyboardOptions(
-                keyboardType = keyboardType
+                keyboardType = keyboardType,
+                imeAction = imeAction,
             ),
             cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
             interactionSource = interactionSource,

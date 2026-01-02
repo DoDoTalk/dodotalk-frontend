@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,6 +64,7 @@ fun ForgotPasswordScreen(
                 isError = state.errorText != null,
                 supportingText = state.errorText?.asString(),
                 keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Done,
                 singleLine = true,
             )
             Spacer(modifier = Modifier.height(16.dp))

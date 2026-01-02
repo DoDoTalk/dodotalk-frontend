@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -83,6 +84,7 @@ fun LoginScreen(
                 state = state.emailTextFieldState,
                 placeholder = stringResource(Res.string.email_placeholder),
                 keyboardType = KeyboardType.Email,
+                imeAction = ImeAction.Next,
                 singleLine = true,
                 modifier = Modifier
                     .fillMaxWidth(),
