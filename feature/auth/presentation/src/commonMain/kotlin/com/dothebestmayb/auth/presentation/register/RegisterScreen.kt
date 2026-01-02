@@ -92,7 +92,8 @@ fun RegisterScreen(
                 isError = state.usernameError != null,
                 onFocusChanged = { isFocusChanged ->
                     onAction(RegisterAction.OnInputTextFocusGain)
-                }
+                },
+                singleLine = true,
             )
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -106,6 +107,7 @@ fun RegisterScreen(
                     onAction(RegisterAction.OnInputTextFocusGain)
                 },
                 keyboardType = KeyboardType.Email,
+                singleLine = true,
             )
             Spacer(modifier = Modifier.height(16.dp))
 
