@@ -37,7 +37,9 @@ fun NavGraphBuilder.authGraph(
         composable<AuthGraphRoutes.Register> {
             RegisterRoot(
                 onRegisterSuccess = {
-                    navController.navigate(AuthGraphRoutes.RegisterSuccess(it))
+                    navController.navigate(AuthGraphRoutes.RegisterSuccess(it)) {
+                        popUpTo<AuthGraphRoutes.Login>()
+                    }
                 },
                 onLoginClick = {
                     navController.navigate(AuthGraphRoutes.Login) {
