@@ -1,9 +1,11 @@
 package com.dothebestmayb.auth.presentation.email_verify_resend
 
 import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dothebestmayb.auth.domain.EmailValidator
 import com.dothebestmayb.auth.presentation.register_success.RegisterSuccessEvent
 import com.dothebestmayb.core.domain.auth.AuthService
 import com.dothebestmayb.core.domain.util.onFailure
@@ -11,6 +13,10 @@ import com.dothebestmayb.core.domain.util.onSuccess
 import com.dothebestmayb.core.presentation.util.toUiText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -34,7 +40,7 @@ class EmailVerifyResendViewModel(
     val state = _state
         .onStart {
             if (!hasLoadedInitialData) {
-                /** Load initial data here **/
+                observeValidationState()
                 hasLoadedInitialData = true
             }
         }
@@ -44,10 +50,24 @@ class EmailVerifyResendViewModel(
             initialValue = EmailVerifyResendState()
         )
 
+    private val isEmailValidFlow = snapshotFlow { state.value.emailTextFieldState.text.toString() }
+        .map { email -> EmailValidator.validate(email) }
+        .distinctUntilChanged()
+
     fun onAction(action: EmailVerifyResendAction) {
         when (action) {
             is EmailVerifyResendAction.OnSubmitClick -> resendVerification()
         }
+    }
+
+    private fun observeValidationState() {
+        isEmailValidFlow.onEach { isEmailValid ->
+            _state.update {
+                it.copy(
+                    canSubmit = isEmailValid
+                )
+            }
+        }.launchIn(viewModelScope)
     }
 
     private fun resendVerification() {
