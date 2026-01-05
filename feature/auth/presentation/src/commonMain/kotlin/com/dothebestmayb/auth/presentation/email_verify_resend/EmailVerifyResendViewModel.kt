@@ -6,7 +6,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dothebestmayb.auth.domain.EmailValidator
-import com.dothebestmayb.auth.presentation.register_success.RegisterSuccessEvent
 import com.dothebestmayb.core.domain.auth.AuthService
 import com.dothebestmayb.core.domain.util.onFailure
 import com.dothebestmayb.core.domain.util.onSuccess
@@ -29,11 +28,11 @@ class EmailVerifyResendViewModel(
 
     private var hasLoadedInitialData = false
 
-    private val email = savedStateHandle.get<String>("email") ?: ""
-
     private val _state = MutableStateFlow(
         EmailVerifyResendState(
-            emailTextFieldState = TextFieldState(initialText = email)
+            emailTextFieldState = TextFieldState(
+                initialText = savedStateHandle.get<String>("email") ?: ""
+            )
         )
     )
 
@@ -83,6 +82,7 @@ class EmailVerifyResendViewModel(
                     errorText = null,
                 )
             }
+            val email = state.value.emailTextFieldState.text.toString()
 
             authService
                 .resendVerificationEmail(email)
