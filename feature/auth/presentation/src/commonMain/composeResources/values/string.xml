@@ -4,6 +4,7 @@
     <string name="welcome_back">Welcome back!</string>
     <string name="set_new_password">비밀번호 변경하기</string>
     <string name="new_password">새로운 비밀번호</string>
+    <string name="email_verify_resend">이메일 인증 다시하기</string>
     <string name="account_successfully_created">DoDoTalk 계정이 성공적으로 생성됐습니다!</string>
     <string name="verification_email_send_to_x">인증 메일이 %1$s로 발송됐습니다</string>
     <string name="resend_verification_email">인증 메일 재전송</string>
