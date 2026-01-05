@@ -53,7 +53,7 @@ projectVersionName = "1.0"
 projectMinSdkVersion = "26"
 projectTargetSdkVersion = "36"
 projectCompileSdkVersion = "36"
-projectVersionCode = "2"
+projectVersionCode = "3"
 
 # Desktop Version
 desktopPackageName = "DoDoTalk"
