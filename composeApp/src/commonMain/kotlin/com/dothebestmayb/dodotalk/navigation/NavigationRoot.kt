@@ -13,6 +13,7 @@ import com.dothebestmayb.chat.presentation.chat_list.ChatListScreenRoot
 fun NavigationRoot(
     navController: NavHostController,
     startDestination: Any,
+    finish: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -27,6 +28,7 @@ fun NavigationRoot(
                     }
                 }
             },
+            finish = finish,
         )
         composable<ChatListRoute> {
             ChatListScreenRoot()

@@ -25,6 +25,9 @@ class MainActivity : ComponentActivity() {
             App(
                 onAuthenticationChecked = {
                     shouldShowSplashScreen = false
+                },
+                finish = {
+                    finish()
                 }
             )
         }

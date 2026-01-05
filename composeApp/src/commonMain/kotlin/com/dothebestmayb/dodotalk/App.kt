@@ -21,6 +21,7 @@ import org.koin.compose.viewmodel.koinViewModel
 @Preview
 fun App(
     onAuthenticationChecked: () -> Unit = {},
+    finish: () -> Unit = {},
     viewModel: MainViewModel = koinViewModel()
 ) {
     val navController = rememberNavController()
@@ -55,6 +56,7 @@ fun App(
                 } else {
                     AuthGraphRoutes.Graph
                 },
+                finish = finish,
             )
         }
     }

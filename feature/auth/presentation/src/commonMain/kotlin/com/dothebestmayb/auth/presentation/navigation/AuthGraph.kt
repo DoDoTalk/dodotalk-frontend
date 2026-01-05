@@ -16,6 +16,7 @@ import com.dothebestmayb.auth.presentation.reset_password.ResetPasswordRoot
 fun NavGraphBuilder.authGraph(
     navController: NavController,
     onLoginSuccess: () -> Unit,
+    finish: () -> Unit,
 ) {
     navigation<AuthGraphRoutes.Graph>(
         startDestination = AuthGraphRoutes.Login,
@@ -31,6 +32,9 @@ fun NavGraphBuilder.authGraph(
                         restoreState = true
                         launchSingleTop = true
                     }
+                },
+                onEmailVerifyAgainClick = {
+                    navController.navigate(AuthGraphRoutes.EmailVerifyResend)
                 }
             )
         }
@@ -78,18 +82,15 @@ fun NavGraphBuilder.authGraph(
             EmailVerificationRoot(
                 onLoginClick = {
                     navController.navigate(AuthGraphRoutes.Login) {
-                        popUpTo<AuthGraphRoutes.EmailVerification> {
+                        popUpTo<AuthGraphRoutes.Login> {
                             inclusive = true
                         }
                         launchSingleTop = true
                     }
                 },
                 onCloseClick = {
-                    navController.navigate(AuthGraphRoutes.Login) {
-                        popUpTo<AuthGraphRoutes.EmailVerification> {
-                            inclusive = true
-                        }
-                        launchSingleTop = true
+                    if(!navController.popBackStack()) {
+                        finish()
                     }
                 }
             )

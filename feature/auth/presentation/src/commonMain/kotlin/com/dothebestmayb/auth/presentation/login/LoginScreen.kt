@@ -30,6 +30,7 @@ import dodotalk.feature.auth.presentation.generated.resources.Res
 import dodotalk.feature.auth.presentation.generated.resources.create_account
 import dodotalk.feature.auth.presentation.generated.resources.email
 import dodotalk.feature.auth.presentation.generated.resources.email_placeholder
+import dodotalk.feature.auth.presentation.generated.resources.email_verify_resend
 import dodotalk.feature.auth.presentation.generated.resources.forgot_password
 import dodotalk.feature.auth.presentation.generated.resources.login
 import dodotalk.feature.auth.presentation.generated.resources.password
@@ -43,6 +44,7 @@ fun LoginRoot(
     onLoginSuccess: () -> Unit,
     onForgotPasswordClick: () -> Unit,
     onCreateAccountClick: () -> Unit,
+    onEmailVerifyAgainClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -58,6 +60,7 @@ fun LoginRoot(
             when (action) {
                 LoginAction.OnForgotPasswordClick -> onForgotPasswordClick()
                 LoginAction.OnSignUpClick -> onCreateAccountClick()
+                LoginAction.OnEmailVerifyAgainClick -> onEmailVerifyAgainClick()
                 else -> Unit
             }
             viewModel.onAction(action)
@@ -132,6 +135,17 @@ fun LoginScreen(
                 text = stringResource(Res.string.create_account),
                 onClick = {
                     onAction(LoginAction.OnSignUpClick)
+                },
+                style = DoDoTalkButtonStyle.SECONDARY,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+
+            DoDoTalkButton(
+                text = stringResource(Res.string.email_verify_resend),
+                onClick = {
+                    onAction(LoginAction.OnEmailVerifyAgainClick)
                 },
                 style = DoDoTalkButtonStyle.SECONDARY,
                 modifier = Modifier
