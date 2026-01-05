@@ -106,7 +106,16 @@ fun NavGraphBuilder.authGraph(
                 },
             )
         ) {
-            ResetPasswordRoot()
+            ResetPasswordRoot(
+                onLoginClick = {
+                    navController.navigate(AuthGraphRoutes.Login) {
+                        popUpTo<AuthGraphRoutes.Login> {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                },
+            )
         }
     }
 }

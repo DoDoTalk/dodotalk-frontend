@@ -8,7 +8,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.key.Key.Companion.S
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,6 +21,7 @@ import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.designsystem.theme.extended
 import dodotalk.feature.auth.presentation.generated.resources.Res
 import dodotalk.feature.auth.presentation.generated.resources.change
+import dodotalk.feature.auth.presentation.generated.resources.login
 import dodotalk.feature.auth.presentation.generated.resources.password
 import dodotalk.feature.auth.presentation.generated.resources.password_hint
 import dodotalk.feature.auth.presentation.generated.resources.reset_password_successfully
@@ -31,13 +31,20 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ResetPasswordRoot(
-    viewModel: ResetPasswordViewModel = koinViewModel()
+    viewModel: ResetPasswordViewModel = koinViewModel(),
+    onLoginClick: () -> Unit,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     ResetPasswordScreen(
         state = state,
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                is ResetPasswordAction.OnLoginClick -> onLoginClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
@@ -87,6 +94,13 @@ fun ResetPasswordScreen(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center,
                 )
+                DoDoTalkButton(
+                    text = stringResource(Res.string.login),
+                    onClick = {
+                        onAction(ResetPasswordAction.OnLoginClick)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                )
             }
         }
     }
@@ -102,3 +116,17 @@ private fun Preview() {
         )
     }
 }
+
+@Preview
+@Composable
+private fun SuccessPreview() {
+    DoDoTalkTheme {
+        ResetPasswordScreen(
+            state = ResetPasswordState(
+                isResetSuccessful = true,
+            ),
+            onAction = {}
+        )
+    }
+}
+

@@ -73,6 +73,8 @@ class ResetPasswordViewModel(
                     )
                 }
             }
+
+            else -> Unit
         }
     }
 
