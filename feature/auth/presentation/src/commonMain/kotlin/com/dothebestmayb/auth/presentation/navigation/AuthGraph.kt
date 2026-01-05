@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.dothebestmayb.auth.presentation.email_verification.EmailVerificationRoot
+import com.dothebestmayb.auth.presentation.email_verify_resend.EmailVerifyResendRoot
 import com.dothebestmayb.auth.presentation.forgot_password.ForgotPasswordRoot
 import com.dothebestmayb.auth.presentation.login.LoginRoot
 import com.dothebestmayb.auth.presentation.register.RegisterRoot
@@ -92,6 +93,9 @@ fun NavGraphBuilder.authGraph(
                     }
                 }
             )
+        }
+        composable<AuthGraphRoutes.EmailVerifyResend> {
+            EmailVerifyResendRoot()
         }
         composable<AuthGraphRoutes.ForgotPassword> {
             ForgotPasswordRoot()

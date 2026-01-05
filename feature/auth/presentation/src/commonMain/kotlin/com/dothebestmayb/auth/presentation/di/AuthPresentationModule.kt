@@ -1,6 +1,7 @@
 package com.dothebestmayb.auth.presentation.di
 
 import com.dothebestmayb.auth.presentation.email_verification.EmailVerificationViewModel
+import com.dothebestmayb.auth.presentation.email_verify_resend.EmailVerifyResendViewModel
 import com.dothebestmayb.auth.presentation.forgot_password.ForgotPasswordViewModel
 import com.dothebestmayb.auth.presentation.login.LoginViewModel
 import com.dothebestmayb.auth.presentation.register.RegisterViewModel
@@ -16,4 +17,5 @@ val authPresentationModule = module {
     viewModelOf(::LoginViewModel)
     viewModelOf(::ForgotPasswordViewModel)
     viewModelOf(::ResetPasswordViewModel)
+    viewModelOf(::EmailVerifyResendViewModel)
 }
