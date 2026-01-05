@@ -14,7 +14,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dothebestmayb.core.designsystem.components.brand.DoDoTalkBrandLogo
 import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButton
 import com.dothebestmayb.core.designsystem.components.layout.DoDoTalkAdaptiveFormLayout
@@ -29,10 +28,11 @@ import dodotalk.feature.auth.presentation.generated.resources.email_verify_resen
 import dodotalk.feature.auth.presentation.generated.resources.resend_verification_email
 import dodotalk.feature.auth.presentation.generated.resources.resent_verification_email
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun EmailVerifyResendRoot(
-    viewModel: EmailVerifyResendViewModel = viewModel()
+    viewModel: EmailVerifyResendViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
