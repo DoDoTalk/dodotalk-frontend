@@ -25,7 +25,7 @@ class ForgotPasswordViewModel(
 
     private var hasLoadedInitialData = false
 
-    private val isEmailValidFlow = snapshotFlow { state.value.emailTextFiledState.text.toString() }
+    private val isEmailValidFlow = snapshotFlow { state.value.emailTextFieldState.text.toString() }
         .map { email -> EmailValidator.validate(email) }
         .distinctUntilChanged()
 
@@ -72,7 +72,7 @@ class ForgotPasswordViewModel(
                     errorText = null,
                 )
             }
-            val email = state.value.emailTextFiledState.text.toString()
+            val email = state.value.emailTextFieldState.text.toString()
 
             authService
                 .forgotPassword(email)

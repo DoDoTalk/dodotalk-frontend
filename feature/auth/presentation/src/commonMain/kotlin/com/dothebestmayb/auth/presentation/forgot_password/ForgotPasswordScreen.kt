@@ -56,7 +56,7 @@ fun ForgotPasswordScreen(
             }
         ) {
             DoDoTalkTextField(
-                state = state.emailTextFiledState,
+                state = state.emailTextFieldState,
                 modifier = Modifier
                     .fillMaxWidth(),
                 placeholder = stringResource(Res.string.email_placeholder),
