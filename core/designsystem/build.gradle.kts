@@ -16,6 +16,9 @@ kotlin {
 
                 implementation(projects.core.presentation)
 
+                implementation(libs.coil.compose)
+                implementation(libs.coil.network.ktor)
+
                 implementation(libs.jetbrains.compose.components.resources)
                 implementation(libs.jetbrains.compose.ui.tooling.preview)
             }
