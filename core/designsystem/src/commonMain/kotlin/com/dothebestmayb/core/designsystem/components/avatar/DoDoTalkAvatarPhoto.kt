@@ -77,3 +77,15 @@ private fun DoDoTalkAvatarPhotoPreview() {
         )
     }
 }
+
+@Preview
+@Composable
+private fun DoDoTalkAvatarPhotoPlusPreview() {
+    DoDoTalkTheme {
+        DoDoTalkAvatarPhoto(
+            displayText = "2+",
+            size = AvatarSize.LARGE,
+        )
+    }
+}
+
