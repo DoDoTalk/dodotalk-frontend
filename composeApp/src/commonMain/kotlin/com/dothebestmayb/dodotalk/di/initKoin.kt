@@ -3,6 +3,7 @@ package com.dothebestmayb.dodotalk.di
 import com.dothebestmayb.auth.presentation.di.authPresentationModule
 import com.dothebestmayb.chat.presentation.di.chatPresentationModule
 import com.dothebestmayb.core.data.di.coreDataModule
+import com.dothebestmayb.core.presentation.di.corePresentationModule
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
 
@@ -14,6 +15,7 @@ fun initKoin(config: KoinAppDeclaration? = null) {
             authPresentationModule,
             appModule,
             chatPresentationModule,
+            corePresentationModule,
         )
     }
 }
