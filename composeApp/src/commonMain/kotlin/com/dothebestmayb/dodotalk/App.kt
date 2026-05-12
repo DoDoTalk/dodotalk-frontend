@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.dothebestmayb.auth.presentation.navigation.AuthGraphRoutes
-import com.dothebestmayb.chat.presentation.chat_list.ChatListRoute
+import com.dothebestmayb.chat.presentation.navigation.ChatGraphRoutes
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.presentation.util.ObserveAsEvents
 import com.dothebestmayb.dodotalk.navigation.DeepLinkListener
@@ -52,7 +52,7 @@ fun App(
             NavigationRoot(
                 navController = navController,
                 startDestination = if (state.isLoggedIn) {
-                    ChatListRoute
+                    ChatGraphRoutes.Graph
                 } else {
                     AuthGraphRoutes.Graph
                 },

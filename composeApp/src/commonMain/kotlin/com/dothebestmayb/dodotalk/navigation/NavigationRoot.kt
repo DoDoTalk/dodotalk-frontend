@@ -3,11 +3,10 @@ package com.dothebestmayb.dodotalk.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import com.dothebestmayb.auth.presentation.navigation.AuthGraphRoutes
 import com.dothebestmayb.auth.presentation.navigation.authGraph
-import com.dothebestmayb.chat.presentation.chat_list.ChatListRoute
-import com.dothebestmayb.chat.presentation.chat_list.ChatListScreenRoot
+import com.dothebestmayb.chat.presentation.navigation.ChatGraphRoutes
+import com.dothebestmayb.chat.presentation.navigation.chatGraph
 
 @Composable
 fun NavigationRoot(
@@ -22,7 +21,7 @@ fun NavigationRoot(
         authGraph(
             navController = navController,
             onLoginSuccess = {
-                navController.navigate(ChatListRoute) {
+                navController.navigate(ChatGraphRoutes.Graph) {
                     popUpTo(AuthGraphRoutes.Graph) {
                         inclusive = true
                     }
@@ -30,8 +29,8 @@ fun NavigationRoot(
             },
             finish = finish,
         )
-        composable<ChatListRoute> {
-            ChatListScreenRoot()
-        }
+        chatGraph(
+            navController = navController,
+        )
     }
 }
