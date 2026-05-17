@@ -11,7 +11,7 @@ import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 
 @Composable
 fun DoDoTalkStackedAvatars(
-    avatars: List<AvatarUi>,
+    avatars: List<ChatParticipantUi>,
     modifier: Modifier = Modifier,
     size: AvatarSize = AvatarSize.SMALL,
     maxVisible: Int = 2,
@@ -51,22 +51,22 @@ private fun DoDoTalkStackedAvatarsPreview() {
     DoDoTalkTheme {
         DoDoTalkStackedAvatars(
             avatars = listOf(
-                AvatarUi(
+                ChatParticipantUi(
                     id = "1",
                     username = "DoDoTalk",
                     initials = "DT",
                 ),
-                AvatarUi(
+                ChatParticipantUi(
                     id = "2",
                     username = "MinSu",
                     initials = "MS",
                 ),
-                AvatarUi(
+                ChatParticipantUi(
                     id = "3",
                     username = "JohnDo",
                     initials = "JD",
                 ),
-                AvatarUi(
+                ChatParticipantUi(
                     id = "4",
                     username = "SuDo",
                     initials = "SD",

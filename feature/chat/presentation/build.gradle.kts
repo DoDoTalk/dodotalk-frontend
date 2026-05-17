@@ -21,6 +21,8 @@ kotlin {
                 implementation(libs.material3.adaptive.layout)
                 implementation(libs.material3.adaptive.navigation)
                 implementation(libs.jetbrains.navigationevent.compose)
+
+                implementation(libs.jetbrains.compose.components.resources)
             }
         }
 
