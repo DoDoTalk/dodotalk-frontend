@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.dothebestmayb.chat.domain.models.Chat
 import com.dothebestmayb.chat.presentation.components.ChatParticipantSearchTextSection
 import com.dothebestmayb.chat.presentation.components.ChatParticipantsSelectionSection
 import com.dothebestmayb.chat.presentation.components.ManageChatButtonSection
@@ -29,6 +30,7 @@ import com.dothebestmayb.core.designsystem.components.buttons.DoDoTalkButtonStyl
 import com.dothebestmayb.core.designsystem.components.dialogs.DoDoTalkAdaptiveDialogSheetLayout
 import com.dothebestmayb.core.designsystem.theme.DoDoTalkTheme
 import com.dothebestmayb.core.presentation.util.DeviceConfiguration
+import com.dothebestmayb.core.presentation.util.ObserveAsEvents
 import com.dothebestmayb.core.presentation.util.clearFocusOnTap
 import com.dothebestmayb.core.presentation.util.currentDeviceConfiguration
 import dodotalk.feature.chat.presentation.generated.resources.Res
@@ -40,9 +42,16 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 fun CreateChatRoot(
     onDismiss: () -> Unit,
+    onChatCreated: (Chat) -> Unit,
     viewModel: CreateChatViewModel = koinViewModel()
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveAsEvents(viewModel.events) { event ->
+        when (event) {
+            is CreateChatEvent.OnChatCreated -> onChatCreated(event.chat)
+        }
+    }
 
     DoDoTalkAdaptiveDialogSheetLayout(
         onDismiss = onDismiss,
@@ -138,6 +147,7 @@ fun CreateChatScreen(
                     style = DoDoTalkButtonStyle.SECONDARY,
                 )
             },
+            error = state.createChatError?.asString(),
             modifier = Modifier.fillMaxWidth(),
         )
     }
