@@ -34,7 +34,7 @@ fun ChatParticipantSearchTextSection(
                 horizontal = 20.dp,
                 vertical = 16.dp,
             ),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.Top, // supportingText가 null이 아니여도 TextField가 세로의 중앙에 오도록 CenterVertically 대신 Top 사용
         horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         DoDoTalkTextField(

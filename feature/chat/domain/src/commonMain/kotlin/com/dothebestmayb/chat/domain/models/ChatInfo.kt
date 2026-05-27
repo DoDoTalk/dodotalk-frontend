@@ -1,4 +1,4 @@
-package com.dothebestmayb.feature.domain.models
+package com.dothebestmayb.chat.domain.models
 
 data class ChatInfo(
     val chat: Chat,
