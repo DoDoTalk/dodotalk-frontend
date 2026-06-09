@@ -17,6 +17,8 @@ kotlin {
                 implementation(projects.core.designsystem)
                 implementation(projects.feature.chat.domain)
 
+                implementation(libs.kotlinx.datetime)
+
                 implementation(libs.material3.adaptive)
                 implementation(libs.material3.adaptive.layout)
                 implementation(libs.material3.adaptive.navigation)
