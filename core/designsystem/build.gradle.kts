@@ -44,3 +44,8 @@ kotlin {
     }
 
 }
+
+// 다른 모듈에서 composeResources를 사용할 수 있도록 하기 위한 설정
+compose.resources {
+    publicResClass = true
+}
